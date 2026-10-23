@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Feed</title>
+    <style>
+        body{
+            font-family: 'Segoe UI';
+            margin: 30px;
+            background-color: aliceblue;
+        }
+        .card{
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 5px solid rgb(53, 173, 252);
+        }
+        .breaking{
+            border-left-color: crimson;
+        }
+        .badge{
+            background: whitesmoke;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .alert{
+            color: crimson;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily News Portal</h1>
+    {% if is_editor %}
+        <p>Logged in as: <b>{{ reporter_name|title }}</b><span class="badge">Chief Editor</span></p>
+    {% else %}
+        <p>Logged in as: <b>{{ reporter_name|title }}</b><span class="badge">Reporter</span></p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Top Headlines</h3>
+
+    {% for article in news_list %}
+        <div class="card {% if article.breaking %}breaking{% endif %}">
+            <h4>
+                {{ article.title }}
+                {% if article.breaking %}
+                    <span class="alert">[BREAKING NEWS]</span>
+                {% endif %}
+            </h4>
+            <p>Category: <b>{{ article.category }}</b> Views: {{article.views}}</p>
+        </div>
+    {% empty %}
+        <p>No news for today!!!</p>
+    {% endfor %}
+</body>
+</html>
