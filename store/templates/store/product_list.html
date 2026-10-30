@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Products</title>
+    <style>
+        body{
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            margin: 30px;
+            background-color:#fafafa;
+        }
+        .product-card{
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 9px;
+        }
+        .price{
+            color: greenyellow;
+            font-weight: bold;
+        }
+        .out-of-stock{
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Products in Store</h1>
+    <hr>
+    {% for product in products %}
+        <div class="product-card">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">Price: ${{ product.price }}</p>
+            {% if product.in_stock %}
+                <small style="color: green;">Status: In Stock</small>
+            {% else %}
+                <small class="out-of-stock">Status: Out of Stock</small>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No Products Available!!!</p>
+    {% endfor %}
+</body>
+</html>
