@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responses</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 40px;
+        }
+        .card{
+            background: whitesmoke;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .success-msg{
+            color: rgb(17, 241, 17);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <p class="success-msg">Thank you! Your form has been submitted successfully!</p>
+    <a href="{% url 'feedback_form' %}">Submit Another Response</a>
+    <hr>
+    <h3>All Recieved Feedbacks:</h3>
+    {% for item in feedbacks %}
+        <div class="card">
+            <h4>{{ item.user_name }} ({{ item.user_email }})</h4>
+            <p>{{ item.message }}</p>
+            <small>Submitted at: {{ item.created_at }} </small>
+        </div>
+    {% empty %}
+        <p>No feedback available yet!</p>
+    {% endfor %}
+</body>
+</html>
